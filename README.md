@@ -111,7 +111,7 @@ Included `"test": "vitest"` in package.json
 ```
 
 Edited debugger settings vscode. In debug panel choose 'create a `.vscode/launch.json` file'. In the options that appear click node.js.
-```json
+```jsonc
 {
   "version": "0.2.0",
   "configurations": [
