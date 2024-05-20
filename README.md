@@ -37,7 +37,7 @@ Clone the repo and then:
     npm test
     ```
 
-2. Build and star
+2. Build and start
     ```bash
     npm start
     ```
