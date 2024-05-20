@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { max } from '../src/example';
+import { max } from '../utils/example';
 
 describe('max', () => {
   it('should return the first argument if it is greater', () => { 
