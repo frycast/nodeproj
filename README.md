@@ -1,6 +1,50 @@
-### Setup
+## Setup
 
-Node and ts init
+### Prerequisites
+
+Ensure you have the following installed:
+- Node.js (v20.13.1)
+- npm (v10.5.2)
+
+You can use `fnm` (Fast Node Manager) to install and manage Node.js versions.
+
+```bash
+curl -fsSL https://fnm.vercel.app/install | bash
+fnm use --install-if-missing 20
+node -v # should print `v20.13.1`
+npm -v # should print `10.5.2`
+```
+
+### Installation Steps
+
+Clone the repo and then:
+
+1. **Install Project Dependencies**:
+    ```bash
+    npm install
+    ```
+
+2. **Verify TypeScript and Vitest Installation**:
+    ```bash
+    tsc -v # should be 5.4.5
+    npm list vitest # should be vitest@1.6.0
+    ```
+
+### Running the project
+
+1. Compile typescript
+    ```bash
+    npx tsc
+    ```
+
+2. Run tests
+    ```bash
+    npm test
+    ```
+
+# Original setup 2024-05-20
+
+Installed node, ts and vitest
 ```bash
 curl -fsSL https://fnm.vercel.app/install | bash
 fnm use --install-if-missing 20
@@ -10,9 +54,11 @@ npm init -y
 npm install --save-dev typescript
 tsc -v # should be 5.4.5
 npx tsc --init
+npm install --save-dev vitest
+npm list vitest # should be vitest@1.6.0
 ```
 
-Change Typescript configs
+Changed Typescript configs
 ```json
 {
   "compilerOptions": {
@@ -44,7 +90,26 @@ Change Typescript configs
 }
 ```
 
-Debugger settings vscode. In debug panel choose 'create a `.vscode/launch.json` file'. In the options that appear click node.js.
+Included `"test": "vitest"` in package.json
+```json
+  "name": "soltrug",
+  "version": "1.0.0",
+  "description": "Add description here",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}
+```
+
+Edited debugger settings vscode. In debug panel choose 'create a `.vscode/launch.json` file'. In the options that appear click node.js.
 ```json
 {
   "version": "0.2.0",
@@ -63,5 +128,7 @@ Debugger settings vscode. In debug panel choose 'create a `.vscode/launch.json` 
   ]
 }
 ```
+
+Created `./src/example.ts` and `./tests/example.ts.test` 
 
 

@@ -4,12 +4,13 @@
   "description": "Node init ```bash curl -fsSL https://fnm.vercel.app/install | bash fnm use --install-if-missing 20 node -v # should print `v20.13.1` npm -v # should print `10.5.2` npm init ```",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   }
 }
