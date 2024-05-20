@@ -32,14 +32,14 @@ Clone the repo and then:
 
 ### Running the project
 
-1. Compile typescript
-    ```bash
-    npx tsc
-    ```
-
-2. Run tests
+1. Run tests
     ```bash
     npm test
+    ```
+
+2. Build and star
+    ```bash
+    npm start
     ```
 
 # Original setup 2024-05-20
