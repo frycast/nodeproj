@@ -59,7 +59,7 @@ npm list vitest # should be vitest@1.6.0
 ```
 
 Changed Typescript configs
-```json
+```jsonc
 {
   "compilerOptions": {
     "target": "es2016",
@@ -92,6 +92,7 @@ Changed Typescript configs
 
 Included `"test": "vitest"` in package.json
 ```json
+{
   "name": "soltrug",
   "version": "1.0.0",
   "description": "Add description here",
