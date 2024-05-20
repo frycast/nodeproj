@@ -18,7 +18,7 @@ const config = convict({
   myvar: {
     doc: 'An example variable',
     format: String,
-    default: '',
+    default: undefined,
     env: 'MYVAR'
   },
   secrets: {
@@ -26,13 +26,13 @@ const config = convict({
       public: {
         doc: 'Example public key',
         format: String,
-        default: '',
+        default: undefined,
         env: 'MYSECRET_PUBLIC'
       },
       private: {
         doc: 'Example secret key',
         format: String,
-        default: '',
+        default: undefined,
         env: 'MYSECRET_PRIVATE',
         sensitive: true
       }
@@ -40,7 +40,7 @@ const config = convict({
     myothersecret: {
       doc: 'Another secret',
       format: String,
-      default: '',
+      default: undefined,
       env: 'MYOTHERSECRET',
       sensitive: true
     }
