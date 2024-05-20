@@ -1,34 +1,57 @@
+import convict from 'convict';
 import dotenv from 'dotenv';
 import path from 'path';
-import { Secrets, loadSecrets } from './utils/loadSecrets';
-
-// Ensure NODE_ENV is set to 'development' if not already set
-process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
-const env = process.env.NODE_ENV;
 
 // Load environment variables from the .env file
-if (!['dev', 'test'].includes(env)) {
-  throw new Error(`Invalid NODE_ENV: ${env}`);
-}
-dotenv.config({ path: path.resolve(__dirname, `.env.${env}`) });
+dotenv.config({ 
+  path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV || 'dev'}`) 
+});
 
-// Load secrets
-const secrets: Secrets = loadSecrets();
+// Define config schema
+const config = convict({
+  node_env: {
+    doc: 'The application environment.',
+    format: ['prod', 'dev', 'test'],
+    default: 'dev',
+    env: 'NODE_ENV'
+  },
+  myvar: {
+    doc: 'An example variable',
+    format: String,
+    default: '',
+    env: 'MYVAR'
+  },
+  secrets: {
+    mysecret: {
+      public: {
+        doc: 'Example public key',
+        format: String,
+        default: '',
+        env: 'MYSECRET_PUBLIC'
+      },
+      private: {
+        doc: 'Example secret key',
+        format: String,
+        default: '',
+        env: 'MYSECRET_PRIVATE',
+        sensitive: true
+      }
+    },
+    myothersecret: {
+      doc: 'Another secret',
+      format: String,
+      default: '',
+      env: 'MYOTHERSECRET',
+      sensitive: true
+    }
+  }
+});
 
-export interface EnvConfig {
-  NODE_ENV: string;
-  MYVAR: string;
-}
+// Perform validation
+config.validate({ allowed: 'strict' });
 
-export interface Config extends EnvConfig {
-  secrets: Secrets;
-  [key: string]: any; // To allow other environment variables
-}
-
-// We want the config object to hold everything
-const config: Config = {
-  NODE_ENV: process.env.NODE_ENV,
-  MYVAR: process.env.MYVAR,
-  secrets
-};
 export { config };
+
+// Export the ProjConfig type for clarity with TypeScript
+type ConfigSchema = typeof config;
+export type ProjConvig = ReturnType<ConfigSchema['getProperties']>;

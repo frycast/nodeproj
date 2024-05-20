@@ -48,18 +48,22 @@ Installed node, ts and vitest
 ```bash
 curl -fsSL https://fnm.vercel.app/install | bash
 fnm use --install-if-missing 20
-node -v # should be v20.13.1
-npm -v # should be 10.5.2
+node -v # v20.13.1
+npm -v # 10.5.2
 npm init -y
 npm install --save-dev typescript
-tsc -v # should be 5.4.5
+tsc -v # 5.4.5
 npx tsc --init
 npm install --save-dev vitest
-npm list vitest # should be vitest@1.6.0
+npm list vitest # vitest@1.6.0
 npm install dotenv
-npm list dotenv # should be dotenv@16.4.5
+npm list dotenv # dotenv@16.4.5
 npm install --save-dev @types/node
-npm list @types/node # should be @types/node@20.12.12
+npm list @types/node # @types/node@20.12.12
+npm install convict
+npm list convict # convict@6.2.4
+npm i --save-dev @types/convict
+npm list @types/convict # @types/convict@6.1.6
 ```
 
 Changed Typescript configs
@@ -143,7 +147,7 @@ Edited debugger settings vscode. In debug panel choose 'create a `.vscode/launch
 ```
 
 Other steps taken:
-* Created `./src/config.ts`, `./src/types/config.d.ts` and `./src/utils/loadSecrets.ts` to support test and dev environment variables and json secrets object that can be passed as base64 string, e.g., from GitHub Actions with GitHub Secrets.
+* Created `./src/config.ts` and `./src/utils/loadSecrets.ts` to support test and dev environment variables and json secrets object that can be passed as base64 string, e.g., from GitHub Actions with GitHub Secrets.
 * Created example `secrets.json`, `.env.dev`, `.env.test`
 * Created `./src/utils/example.ts` and `./src/tests/example.ts.test` for example test.
 

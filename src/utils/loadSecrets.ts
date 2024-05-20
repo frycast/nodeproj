@@ -1,37 +1,21 @@
 import path from 'path';
 import fs from 'fs';
-
-// Define the structure of secrets.json
-export interface MySecret {
-  PUBLIC: string;
-  PRIVATE: string;
-}
-export interface Secrets {
-  MYSECRET: MySecret;
-  MYOTHERSECRET: string;
-}
+import { config } from '../config';
 
 // We want secrets to optionally be supplied as a base64 string
-// which is useful for CI/CD pipelines
-export function loadSecrets(): Secrets {
-  let secrets: Secrets;
-
+// which is useful for CI/CD pipelines (e.g., GitHub Actions with secrets)
+export function loadSecrets() {
   if (process.env.SECRETS_BASE64) {
-    // Load from base64 encoded environment variable
-    const decodedSecrets = Buffer.from(
-      process.env.SECRETS_BASE64, 'base64').toString('utf-8');
-    secrets = JSON.parse(decodedSecrets);
+    const decodedSecrets = Buffer.from(process.env.SECRETS_BASE64, 'base64').toString('utf-8');
+    const secrets = JSON.parse(decodedSecrets);
+    config.set('secrets', secrets);
   } else {
-    // Load from local file
-    const resolvedPath = path.resolve(process.cwd(), 'secrets.json');
+    const resolvedPath = path.resolve(__dirname, '../../secrets.json');
     if (fs.existsSync(resolvedPath)) {
-      secrets = JSON.parse(
-        fs.readFileSync(resolvedPath, 'utf-8'));
+      const secrets = JSON.parse(fs.readFileSync(resolvedPath, 'utf-8'));
+      config.set('secrets', secrets);
     } else {
-      throw new Error(
-        `SECRETS_BASE64 not provided and secrets file not found: ${resolvedPath}`);
+      throw new Error(`SECRETS_BASE64 not provided and secrets file not found: ${resolvedPath}`);
     }
   }
-
-  return secrets;
 }

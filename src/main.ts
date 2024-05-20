@@ -1,10 +1,8 @@
 import { config } from './config';
+import { loadSecrets } from './utils/loadSecrets';
 
-// Access environment variables directly
-console.log(`NODE_ENV: ${config.NODE_ENV}`);
-console.log(`MYVAR: ${config.MYVAR}`);
+// Load secrets
+loadSecrets();
 
-// Access secrets
-console.log(`mysecret (public): ${config.secrets.MYSECRET.PUBLIC}`);
-console.log(`mysecret (private): ${config.secrets.MYSECRET.PRIVATE}`);
-console.log(`myothersecret (private): ${config.secrets.MYOTHERSECRET}`);
+// Log the configuration
+console.log('Configuration: ' + config.toString());

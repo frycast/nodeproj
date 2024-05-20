@@ -12,11 +12,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/convict": "^6.1.6",
     "@types/node": "^20.12.12",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "convict": "^6.2.4",
     "dotenv": "^16.4.5"
   }
 }
