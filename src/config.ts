@@ -1,6 +1,7 @@
 import convict from 'convict';
 import dotenv from 'dotenv';
 import path from 'path';
+import { loadSecrets } from './utils/loadSecrets';
 
 // Load environment variables from the .env file
 dotenv.config({ 
@@ -51,6 +52,12 @@ const config = convict({
 config.validate({ allowed: 'strict' });
 
 export { config };
+
+// Load secrets
+loadSecrets();
+
+// Perform validation now with secrets
+config.validate({ allowed: 'strict' });
 
 // Export the ProjConfig type for clarity with TypeScript
 type ConfigSchema = typeof config;
